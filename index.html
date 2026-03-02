@@ -1,25 +1,353 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
-
-
 <head>
-
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boku Wa Dokuta, Toni Toni Choppa</title>
+    <title>type.</title>
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+            background: grey;
+            font-family: Arial, sans-serif;
+        }
+
+        #main-menu{
+
+            display: flex;
+            color: white;
+            text-align: left;
+
+        }
+
+        .dropbtn{
+
+            color: white;
+            background-color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .dropbtn:hover, .dropbtn:focus{
+
+            background-color: darkgreen;
+        }
+
+        .dropdown{
+            position: absolute;
+            display: inline-block;
+            top:20px;
+            left:20px;
+
+        }
+
+        .dropdown-content {
+
+            display: none;
+            position: absolute;
+            background-color: darkgreen;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+
+        }
+
+        .dropdown-content a {
+
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .show{display:block;}
+
+
+
+        #about-me{
+
+            h1 {
+                margin-bottom: 20px; /* This creates a clean space before the Japanese text starts */
+            }
+
+            p {
+                line-height: 1.6; /* This makes the Japanese characters easier to read */
+                font-size: 1.2rem;
+            }
+
+            img{
+                display: flex;
+                flex-direction: column;
+                padding-top: 15px;
+                height: 740px;
+                width: 490px;
+
+
+            }
+
+           display: flex;
+            flex-direction: column;
+
+            position: static;
+
+            top: 50px;
+            padding-top: 20px;
+
+            color: black;
+
+            text-align: center;
+
+        }
+
+
+    </style>
 </head>
 <body>
 
-<h1>Boku Wa Dokuta</h1>
 
-<p>My first paragraph!!</p>
 
-<a href="https://www.youtube.com/watch?v=feoCpaaRkb4">Boku wa dokuta</a>
 
-<img src="C:\Users\fmhat\Pictures\Tony_Tony_Chopper_Anime_Pre_Timeskip_Infobox.jpg" alt="Dokuta Choppa" width = "400" height = "400">
+<div id="app">
+<h1>Hello.</h1>
+    <label for="password"></label>
+    <input type ="password" id = "password" placeholder = "Enter?" onkeydown="if(event.key==='Enter') checkPassword()">
+<button onclick="checkPassword()">Enter</button>
+    <p id="error-msg" style="display:none">Wrong password</p>
+</div>
+
+<div id="game" style="display:none">
+
+    <input type="text" id="user-input" placeholder="Type here" onkeydown="if(event.key==='Enter') typingCheck()">
+    <button onclick="typingCheck()">Enter</button>
+
+    <p id="wrong-ans" style="display:none"> Try again </p>
+
+</div>
+
+<div id="game-over" style ="display:none">
+
+    <h> Good Job! </h>
+
+    <input type ="button" value = "Let's go!" onclick="mainMenu()">
+
+
+</div>
+
+<div id="main-menu" style ="display:none">
+
+    <h1 onclick="goToStart()" style = "cursor: pointer;">F Dog's Domain</h1>
+
+
+</div>
+
+<div id="dropdown" style = "display:none" class = "dropdown">
+
+    <button onclick="dropDown()" class="dropbtn">Stuff</button>
+    <div id="myDropdown" class = "dropdown-content">
+        <a href = "#home" class = "home-link" onclick="goToStart()">Home</a>
+        <a href="#about-me" class = "about-link" onclick="aboutMe()">About Me</a>
+
+    </div>
+
+
+</div>
+
+
+<div id="about-me" style = "display:none">
+
+
+    <h1>Hello!</h1>
+
+    <p>私はフランクリンです。今、私の専攻はコンピューター科学です。このウエブサイトは私の練習のことを使います。</p>
+    <p>私はUWタコマの大学生です。このサイトを改善するために作っています。</p>
+    <p>I'm Franklin. My major is Computer Science. I'm using this website to practice.</p>
+    <p>I am a student at UW Tacoma. I am making this website to improve my skills.</p>
+
+
+    <p>Here's a photo of me at the beginning of my high-school senior year.</p>
+    <img src="me2.JPG" alt="Picture of me" width="4928" height="3264">
+
+
+
+
+</div>
+
 
 </body>
+
+
+
+<script>
+
+    const password = "1";
+
+    let count = 0;
+
+function checkPassword() {
+    const passwordInput = document.getElementById('password').value;
+
+    if (passwordInput === password) {
+
+        document.getElementById("app").style.display = "none";
+        document.getElementById("game-over").style.display = "block";
+
+    }else{
+        document.getElementById("error-msg").style.display = "block";
+    }
+
+}
+
+
+function typingCheck(){
+
+    const word = "Hello!";
+
+    const userInput = document.getElementById('user-input').value;
+
+
+    if (userInput === word) {
+        count++;
+        document.getElementById("game").style.display = "none";
+        document.getElementById("main-menu").style.display = "flex"
+        document.getElementById("dropdown").style.display = "inline-block";
+    }else{
+
+        document.getElementById("wrong-ans").style.display = "block";
+
+    }
+
+
+}
+
+    function mainMenu(){
+
+        document.getElementById("game-over").style.display = "none";
+        document.getElementById("main-menu").style.display = "flex";
+        document.getElementById("dropdown").style.display = "inline-block";
+
+
+    }
+
+    function goToStart() {
+        if (count >= 1) {
+
+            document.getElementById("app").style.display = "none";
+
+
+            document.getElementById("main-menu").style.display = "flex";
+
+
+            document.getElementById("game-over").style.display = "none";
+            document.getElementById("game").style.display = "none";
+            document.getElementById("about-me").style.display = "none";
+
+
+            document.getElementById("dropdown").style.display = "inline-block";
+        } else {
+
+            document.getElementById("main-menu").style.display = "none";
+            document.getElementById("game-over").style.display = "none";
+            document.getElementById("game").style.display = "none";
+            document.getElementById("app").style.display = "block";
+            document.getElementById("password").value = "";
+            document.getElementById("dropdown").style.display = "none";
+            document.getElementById("about-me").style.display = "none";
+        }
+
+    }
+
+    function dropDown(){
+
+    document.getElementById("myDropdown").classList.toggle("show");
+
+    } window.onclick = function(event){
+
+        if(!event.target.matches('.dropbtn')){
+
+            var dropdowns = document.getElementsByClassName('dropdown-content');
+
+            var i;
+
+            for(i= 0; i < dropdowns.length; i++){
+
+                var openDropdown = dropdowns[i];
+
+                if(openDropdown.classList.contains('show')){
+                    openDropdown.classList.remove('show');
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+function aboutMe() {
+
+    } window.onclick = function(event){
+
+        if(event.target.matches('.about-link')){
+
+            const target = document.getElementById('about-me');
+
+            document.getElementById("main-menu").style.display = "none";
+
+
+            target.style.display = "flex";
+
+
+            event.preventDefault();
+
+        }
+
+
+
+
+
+
+
+    }
+
+        /* function goHome(){
+
+
+    }window.onclick = function(event){
+
+    if(event.target.matches('.home-link')){
+
+        const target = document.getElementById('home');
+        document.getElementById("main-menu").style.display = "none";
+        target.style.display = "flex";
+        event.preventDefault();
+
+    }*/
+
+
+
+
+
+
+
+
+
+</script>
+
 </html>
